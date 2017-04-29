@@ -1,30 +1,14 @@
-﻿﻿using System.Collections;
+﻿﻿﻿﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class StageController : MonoBehaviour {
-    int[,] tmpStageData = {
-        {0,0,0},
-        {0,0,0},
-        {1,1,1},
-    };
+    int[,] stageData = new int[100, 10];
 
     public GameObject stage;
-    int marginX = 1, marginY = 1;
+    int marginX = 0, marginY = 1;
     // Use this for initialization
     void Start() {
-        /*
-        List<List<int>> stageData = new List<List<int>>();
-        stageData.Add(new List<int>(new int[] {0,0,0,0 }));
-        stageData.Add(new List<int>(new int[] { 0, 0, 0, 0 }));
-        stageData.Add(new List<int>(new int[] { 0, 0, 0, 0 }));
-        stageData.Add(new List<int>(new int[] { 0, 0, 0, 0 }));
-        stageData.Add(new List<int>(new int[] { 0, 0, 0, 0 }));
-        stageData.Add(new List<int>(new int[] { 0, 0, 0, 0 }));
-        stageData.Add(new List<int>(new int[] { 0, 0, 0, 0 }));
-*/
-
-        int[,] stageData = new int[100, 10];
         for (int x = 0; x < stageData.GetLength(0); x++) {
             for (int y = 0; y < stageData.GetLength(1) - 1; y++) {
                 stageData[x, y] = Random.Range(0, 1 + 1);
