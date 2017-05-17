@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
     Rigidbody rig;
     public Vector2 position;
     public Vector2 offset;
+    public float speed;
     // Use this for initialization
     void Start() {
         rig = GetComponent<Rigidbody>();
@@ -21,24 +22,33 @@ public class Player : MonoBehaviour {
         //rig = GetComponent<Rigidbody>();
 
         offset = mainCamera.transform.position - transform.position;
+        speed = 1.0f;
     }
 
     void LateUpdate() {
+        speed += 0.005f;
+        Debug.Log(speed);
+        speed = Mathf.Clamp(speed, 0.0f, 10.0f);
         GameObject curentCamera = mainCameraObj;
+        Vector3 newPosition = curentCamera.transform.position;
+
+        newPosition.x = transform.position.x + offset.x + 3;
+        newPosition.y = transform.position.y;
+
         if (mainCamera.enabled == true) {
             curentCamera = mainCameraObj;
+            newPosition.x = transform.position.x;
         }
         else if (leftCamera.enabled == true) {
             curentCamera = leftCameraObj;
+            newPosition.x = transform.position.x-6;
+
         }
         else if (rightCamera.enabled == true) {
             curentCamera = rightCameraObj;
+            newPosition.x = transform.position.x+6;
         }
 
-
-        Vector3 newPosition = curentCamera.transform.position;
-        newPosition.x = transform.position.x + offset.x+3;
-        newPosition.y = 0;
         curentCamera.transform.position = newPosition;
     }
 
@@ -47,22 +57,20 @@ public class Player : MonoBehaviour {
         CameraMove();
 
         position = transform.position;
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            rig.AddForce(new Vector2(0.0f, 400.0f));
+        if (Input.GetKeyDown(KeyCode.Space) && transform.position.y<=0.5) {
+            rig.AddForce(new Vector2(0.0f, 5000.0f));
         }
-        if (Input.GetKey(KeyCode.RightArrow)) {
-            position.x += 0.1f;
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            //offset = rightCameraObj.transform.position - transform.position;
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-            //offset = leftCameraObj.transform.position - transform.position;
-        }
+        //if (Input.GetKey(KeyCode.RightArrow)) {
+        //position.x += 0.1f*speed;
+        //}
         if (Input.GetKey(KeyCode.LeftArrow)) {
-            //rig.AddForce(new Vector2(-10.0f, 0.0f));
-            position.x -= 0.1f;
+            position.x -= 0.1f*speed;
+
+            speed -=0.05f;
+        }else{
+            position.x += 0.1f * speed;
         }
+
         transform.position = position;
     }
 
