@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StageController : MonoBehaviour {
-    int[,] stageData = new int[100,5];
+    int[,] stageData = new int[500,5];
+    public Material block;
 
     public GameObject stage;
     int marginX = -1, marginY = -1;
@@ -27,6 +28,7 @@ public class StageController : MonoBehaviour {
             for (int y = 0; y < stageData.GetLength(1); y++) {
                 if (stageData[x, y] == 1) {
                     var obj = Instantiate(stage, new Vector2(marginX + x, marginY + y), Quaternion.identity);
+                    //obj.GetComponent<MeshRenderer>().material = block;
                 }
             }
         }
