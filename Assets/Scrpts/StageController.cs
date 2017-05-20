@@ -21,7 +21,7 @@ public class StageController : MonoBehaviour {
                 stageData[x, 2] = 0;
                 */
                 stageData[x, 0] = 1;
-                Debug.Log(stageData[x, y]);
+                //Debug.Log(stageData[x, y]);
             }
         }
         for (int x = 0; x < stageData.GetLength(0); x++) {
