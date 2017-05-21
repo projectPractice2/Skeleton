@@ -38,4 +38,7 @@ public class StageController : MonoBehaviour {
     void Update() {
 
     }
+    void MapDataLoad() {
+        TextAsset text = Resources.Load<TextAsset>("MapData");
+    }
 }
