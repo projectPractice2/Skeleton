@@ -16,7 +16,7 @@ public class Score : MonoBehaviour {
     List<scoreData_t> scoreData = new List<scoreData_t>();
 	// Use this for initialization
 	void Start () {
-        
+        DontDestroyOnLoad(gameObject);
     }
 
     public void AddScore(string name,int score){
