@@ -22,7 +22,6 @@ public class CameraControll : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         Vector3 pos = transform.position;
-        //Debug.Log(pos);
 
         if (Input.GetKey(KeyCode.RightArrow) || key.IsKey("Right")) {
             x = 6;
