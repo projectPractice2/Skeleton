@@ -29,7 +29,8 @@ public class StageController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        Debug.Log("1:"+stageData.GetLength(1)+" 0:"+stageData.GetLength(0));
+        //Debug.Log("1:"+stageData.GetLength(1)+" 0:"+stageData.GetLength(0));
+
     }
     void MapDataLoad() {
         string text = Resources.Load<TextAsset>("MapData").text;
@@ -38,7 +39,7 @@ public class StageController : MonoBehaviour {
         textList = texts.ToList();
         textList.RemoveAt(0);
 
-        for (int i = 0; i < textList.Count-1; i++) {
+        for (int i = 0; i < textList.Count - 1; i++) {
             string[] line = textList[i].Split(',');
             Debug.Log(textList[i]);
             for (int j = 0; j < line.Length; j++) {
@@ -52,9 +53,9 @@ public class StageController : MonoBehaviour {
     void log(string filePath) {
         FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write);
         StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
-        for (int j = 0; j < stageData.GetLength(1); j++) {
-            for (int i = 0; i < stageData.GetLength(0); i++) {
-                sw.Write(stageData[i,j]);
+        for (int i = 0; i < stageData.GetLength(0); i++) {
+            for (int j = 0; j < stageData.GetLength(1); j++) {
+                sw.Write(stageData[i, j]);
             }
             sw.Write("\r\n");
         }
