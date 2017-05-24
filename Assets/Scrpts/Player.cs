@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    Camera mainCamera,rightCamera,leftCamera;
-    GameObject mainCameraObj,rightCameraObj,leftCameraObj;
+    Camera mainCamera, rightCamera, leftCamera;
+    GameObject mainCameraObj, rightCameraObj, leftCameraObj;
     Rigidbody rig;
     public Vector2 position;
     public Vector2 offset;
     public float speed;
+
+    float StartPos, EndPos;//x座標
+    Vector2 pos;
 
     Key key;
     // Use this for initialization
@@ -20,7 +23,7 @@ public class Player : MonoBehaviour {
         rightCameraObj = GameObject.Find("Right Camera");
         leftCameraObj = GameObject.Find("Left Camera");
 
-        mainCamera =mainCameraObj.GetComponent<Camera>();
+        mainCamera = mainCameraObj.GetComponent<Camera>();
         //rightCamera = rightCameraObj.GetComponent<Camera>();
         //leftCamera = leftCameraObj.GetComponent<Camera>();
         //rig = GetComponent<Rigidbody>();
@@ -72,9 +75,25 @@ public class Player : MonoBehaviour {
             position.x -= 0.1f * speed;
             speed -= 0.05f;
         } else {
-            position.x += 0.1f * speed;
+            //position.x += 0.1f * speed;
         }
-
+        Flick();
         transform.position = position;
+    }
+
+    void Flick() {
+        if (Input.GetMouseButtonDown(0)) {
+            Debug.Log("start position : " + StartPos);
+            StartPos = Input.mousePosition.x;
+        }
+        if (Input.GetMouseButtonUp(0)) {
+            Debug.Log("end position : " + EndPos);
+            EndPos = Input.mousePosition.x;
+        }
+        if (StartPos > EndPos) {
+            position.x -= 0.1f;
+        } else if (StartPos < EndPos) {
+            position.x += 0.1f;
+        }
     }
 }
