@@ -24,9 +24,6 @@ public class Player : MonoBehaviour {
         leftCameraObj = GameObject.Find("Left Camera");
 
         mainCamera = mainCameraObj.GetComponent<Camera>();
-        //rightCamera = rightCameraObj.GetComponent<Camera>();
-        //leftCamera = leftCameraObj.GetComponent<Camera>();
-        //rig = GetComponent<Rigidbody>();
 
         offset = mainCamera.transform.position - transform.position;
         speed = 1.0f;
@@ -34,31 +31,7 @@ public class Player : MonoBehaviour {
 
     void LateUpdate() {
         speed += 0.005f;
-        //Debug.Log(speed);
         speed = Mathf.Clamp(speed, 0.0f, 10.0f);
-        //GameObject curentCamera = mainCameraObj;
-        //Vector3 newPosition = curentCamera.transform.position;
-
-        //newPosition.x = transform.position.x + offset.x;
-        //newPosition.y = transform.position.y + 2.0f;
-
-        /*
-        if (mainCamera.enabled == true) {
-            curentCamera = mainCameraObj;
-            newPosition.x = transform.position.x;
-        }
-        else if (leftCamera.enabled == true) {
-            curentCamera = leftCameraObj;
-            newPosition.x = transform.position.x-6;
-
-        }
-        else if (rightCamera.enabled == true) {
-            curentCamera = rightCameraObj;
-            newPosition.x = transform.position.x+6;
-        }
-
-        curentCamera.transform.position = newPosition;
-        */
     }
 
     // Update is called once per frame
@@ -75,7 +48,7 @@ public class Player : MonoBehaviour {
             position.x -= 0.1f * speed;
             speed -= 0.05f;
         } else {
-            //position.x += 0.1f * speed;
+            position.x += 0.1f * speed;
         }
         Flick();
         transform.position = position;
