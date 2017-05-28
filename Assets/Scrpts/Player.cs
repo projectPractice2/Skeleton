@@ -37,8 +37,13 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         position = transform.position;
-        if ((Input.GetKeyDown(KeyCode.Space) || key.IsKey("Jump")) && transform.position.y <= 0.5) {
+        if ((Input.GetKeyDown(KeyCode.Space) || key.IsKey("Jump")) && transform.position.y <= 2.5) {
             rig.AddForce(new Vector2(0.0f, 5000.0f));
+        }
+        if(Input.GetKey(KeyCode.DownArrow)){
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        } else{
+            transform.localScale = new Vector3(1.0f, 2.0f, 1.0f);
         }
         if (Input.GetKey(KeyCode.RightArrow) || key.IsKey("Right")) {
             position.x += 0.1f * speed;
