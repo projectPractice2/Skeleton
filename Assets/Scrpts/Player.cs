@@ -38,26 +38,28 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         position = transform.position;
-        if ((Input.GetKeyDown(KeyCode.Space) || key.IsKey("Jump")) && jumpCnt <= 10) {
+        if ((Input.GetKeyDown(KeyCode.Space) || key.IsKey("Jump")) && jumpCnt <= 2) {
             rig.AddForce(new Vector2(0.0f, 5000.0f));
             jumpCnt++;
-        } else if (transform.position.y <= 2.5)
-            if (Input.GetKey(KeyCode.DownArrow)) {
-                transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            } else {
-                transform.localScale = new Vector3(1.0f, 2.0f, 1.0f);
-            }
+        } else if (transform.position.y <= 2.5) {
+        }
+
+        if (Input.GetKey(KeyCode.DownArrow)) {
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            position.y = transform.position.y - 0.25f;
+        } else {
+            transform.localScale = new Vector3(1.0f, 2.0f, 1.0f);
+        }
+
         if (Input.GetKey(KeyCode.RightArrow) || key.IsKey("Right")) {
-            //position.x += 0.1f * speed;
             rig.AddForce(new Vector2(50f * speed, 0));
             speed += 0.05f;
         }
         if (Input.GetKey(KeyCode.LeftArrow) || key.IsKey("Left")) {
             rig.AddForce(new Vector2(-50f * speed, 0));
-            //position.x -= 0.1f * speed;
             speed -= 0.05f;
         } else {
-            //position.x += 0.1f * speed;
+            position.x += 0.1f * speed;
         }
         Flick();
         transform.position = position;

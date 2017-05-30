@@ -34,11 +34,9 @@ public class EnemyController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        //if (cnt % 2 == 0) {
+        if (cnt % 60 == 0) {
             EncountEnemy();
-        EncountEnemy();
-        EncountEnemy();
-        //}
+        }
         cnt++;
     }
     void EncountEnemy() {
