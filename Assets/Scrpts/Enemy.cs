@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy : MonoBehaviour {
     int attack, hp;
@@ -16,7 +14,7 @@ public class Enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        rig.AddForce(new Vector2(-60.0f*speed, 0));
 	}
 
     void Move(){

@@ -25,8 +25,6 @@ public class EnemyController : MonoBehaviour {
     [SerializeField]
     EnemyTable enemyDict;
 
-
-
     // Use this for initialization
     void Start() {
 
@@ -34,7 +32,7 @@ public class EnemyController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (cnt % 60 == 0) {
+        if (cnt % 120 == 0) {
             EncountEnemy();
         }
         cnt++;

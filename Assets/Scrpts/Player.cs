@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
         key = GameObject.Find("Key").GetComponent<Key>();
 
         rig = GetComponent<Rigidbody>();
+        rig.velocity = new Vector2(0.1f, 0);
         mainCameraObj = GameObject.Find("Main Camera");
         rightCameraObj = GameObject.Find("Right Camera");
         leftCameraObj = GameObject.Find("Left Camera");
@@ -27,12 +28,12 @@ public class Player : MonoBehaviour {
         mainCamera = mainCameraObj.GetComponent<Camera>();
 
         offset = mainCamera.transform.position - transform.position;
-        speed = 1.0f;
+        speed = 2.0f;
     }
 
     void LateUpdate() {
-        speed += 0.005f;
-        speed = Mathf.Clamp(speed, 0.0f, 10.0f);
+        speed += 0.002f;
+        speed = Mathf.Clamp(speed, 0.0f, 2.0f);
     }
 
     // Update is called once per frame
@@ -46,7 +47,7 @@ public class Player : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.DownArrow)) {
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            position.y = transform.position.y - 0.25f;
+            position.y = transform.position.y;
         } else {
             transform.localScale = new Vector3(1.0f, 2.0f, 1.0f);
         }
@@ -58,8 +59,8 @@ public class Player : MonoBehaviour {
         if (Input.GetKey(KeyCode.LeftArrow) || key.IsKey("Left")) {
             rig.AddForce(new Vector2(-50f * speed, 0));
             speed -= 0.05f;
-        } else {
-            position.x += 0.1f * speed;
+        } else{
+            rig.AddForce(new Vector2(500f * speed, 0));
         }
         Flick();
         transform.position = position;
