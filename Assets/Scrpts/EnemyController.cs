@@ -32,13 +32,13 @@ public class EnemyController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (cnt % 120 == 0) {
+        if (cnt % 60 == 0) {
             EncountEnemy();
         }
         cnt++;
     }
     void EncountEnemy() {
-        var obj = Instantiate(enemyDict.GetTable()["Enemy"], new Vector2(90.0f, 6.5f), Quaternion.identity);
+        var obj = Instantiate(enemyDict.GetTable()["Enemy"], new Vector3(90.0f, 6.5f,-1), Quaternion.identity);
         obj.GetComponent<Rigidbody>().velocity = new Vector2(-20.0f, 0);
     }
 }

@@ -14,7 +14,7 @@ public class StageController : MonoBehaviour {
     int marginX = 0, marginY = 0;
     // Use this for initialization
     void Start() {
-        stageData = new int[10][];
+        stageData = new int[30][];
         for (int y = 0; y < stageData.Length; y++) {
             stageData[y] = new int[100];
         }
@@ -23,7 +23,7 @@ public class StageController : MonoBehaviour {
             for (int x = 0; x < stageData[y].Length; x++) {
                 switch (stageData[y][x]) {
                     case 9:
-                        var obj = Instantiate(stage, new Vector2(marginX + x, marginY + y), Quaternion.identity);
+                        var obj = Instantiate(stage, new Vector3(marginX + x, marginY + y,-1), Quaternion.identity);
                         //obj.GetComponent<MeshRenderer>().material = block;
                         break;
                 }
