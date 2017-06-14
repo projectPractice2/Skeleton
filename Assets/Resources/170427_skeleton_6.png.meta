@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 74678b9649ea74e80a55ae06f15efc79
-timeCreated: 1497415294
+timeCreated: 1497423969
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -98,12 +98,12 @@ TextureImporter:
       name: 170427_skeleton_6_0
       rect:
         serializedVersion: 2
-        x: 310
+        x: 302
         y: 231
         width: 115
         height: 218
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 6
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
