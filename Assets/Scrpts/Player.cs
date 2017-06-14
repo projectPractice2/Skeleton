@@ -3,38 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+    Vector3 NormalColiderSize = new Vector3(1.2f, 1.8f, 1.0f);
+    Vector3 SlidingColiderSize =new Vector3(1.2f, 1.2f, 1.0f);
+
+    Animator anim;
     public GameObject UpperPlayer;
-    Camera mainCamera, rightCamera, leftCamera;
-    GameObject mainCameraObj, rightCameraObj, leftCameraObj;
+    Camera mainCamera;
+    GameObject mainCameraObj;
     Rigidbody rig;
     public Vector3 position;
     public Vector2 offset;
     public float speed;
     int jumpCnt = 0;
 
-    float StartPos, EndPos;//x座標
+    Vector2 StartPos, EndPos;//x座標
     Vector2 pos;
 
     Key key;
     // Use this for initialization
     void Start() {
+        anim = GetComponent<Animator>();
         key = GameObject.Find("Key").GetComponent<Key>();
 
         rig = GetComponent<Rigidbody>();
         mainCameraObj = GameObject.Find("Main Camera");
-        rightCameraObj = GameObject.Find("Right Camera");
-        leftCameraObj = GameObject.Find("Left Camera");
 
         mainCamera = mainCameraObj.GetComponent<Camera>();
 
         offset = mainCamera.transform.position - transform.position;
-        speed = 5.0f;
-        rig.velocity = new Vector2(20.0f, 0);
+        speed = 1.0f;
+        rig.velocity = new Vector2(1.0f, 0);
     }
 
     void LateUpdate() {
         speed += 0.01f;
-        speed = Mathf.Clamp(speed, 0.0f, 5.0f);
+        speed = Mathf.Clamp(speed, 0.0f, 2.0f);
     }
 
     // Update is called once per frame
@@ -48,15 +51,11 @@ public class Player : MonoBehaviour {
         }
 
         if (Input.GetKey(KeyCode.DownArrow) && transform.position.y <= 2.5f) {
-            transform.localScale = new Vector3(-1, 0.4f, 1);
-            //position.y = transform.position.y - (0.25f);
-            rig.velocity = new Vector2(2.0f, 0);
-        }else{
-            transform.localScale = new Vector3(-1, 1.0f, 1);
-            //UpperPlayer.SetActive(true);
+            Sliding();
         }
 
         if (Input.GetKey(KeyCode.RightArrow) || key.IsKey("Right")) {
+            GetComponent<BoxCollider>().size = NormalColiderSize;
             rig.velocity = new Vector2(2.0f * speed, 0);
             speed += 0.05f;
         }
@@ -67,23 +66,34 @@ public class Player : MonoBehaviour {
         } else {
             //rig.velocity = new Vector2(2.0f * speed, 0);
         }
-        Flick();
+        Swipe();
         transform.position = position;
     }
 
-    void Flick() {
+    void Sliding(){
+        GetComponent<BoxCollider>().size = SlidingColiderSize;//スライドしているときのColiderのサイズを代入している
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("sliding")) {//Animator.GetCurrentAnimatorStateInfo() 再生中のアニメーションの判定
+            anim.Play("sliding");
+        }
+        rig.velocity = new Vector2(20.0f, 0);
+    }
+
+    void Swipe() {
         if (Input.GetMouseButtonDown(0)) {
             Debug.Log("start position : " + StartPos);
-            StartPos = Input.mousePosition.x;
+            StartPos = Input.mousePosition;
         }
         if (Input.GetMouseButtonUp(0)) {
             Debug.Log("end position : " + EndPos);
-            EndPos = Input.mousePosition.x;
+            EndPos = Input.mousePosition;
         }
-        if (StartPos > EndPos) {
-            rig.AddForce(new Vector2(-2.0f,0));
-        } else if (StartPos < EndPos) {
-            rig.AddForce(new Vector2(2.0f, 0));
+        //if (StartPos.x > EndPos.x) {
+        //    rig.AddForce(new Vector2(-10.0f, 0));
+        //} else if (StartPos.x < EndPos.x) {
+        //    rig.AddForce(new Vector2(10.0f, 0));
+        //}
+        if (StartPos.y > EndPos.y) {
+            Sliding();
         }
     }
 
