@@ -41,29 +41,31 @@ public class Player : MonoBehaviour {
     void Update() {
         position = transform.position;
         if ((Input.GetKeyDown(KeyCode.Space) || key.IsKey("Jump")) && jumpCnt <= 2) {
-            rig.AddForce(new Vector2(0.0f, 300.0f));
+            Debug.Log("Jump");
+            rig.AddForce(new Vector2(0.0f, 600.0f));
             jumpCnt++;
         } else if (transform.position.y <= 2.5) {
         }
 
         if (Input.GetKey(KeyCode.DownArrow) && transform.position.y <= 2.5f) {
-            UpperPlayer.SetActive(false);
+            transform.localScale = new Vector3(-1, 0.4f, 1);
             //position.y = transform.position.y - (0.25f);
-            rig.AddForce( new Vector2(100.0f, 0));
+            rig.velocity = new Vector2(2.0f, 0);
         }else{
-            UpperPlayer.SetActive(true);
+            transform.localScale = new Vector3(-1, 1.0f, 1);
+            //UpperPlayer.SetActive(true);
         }
 
         if (Input.GetKey(KeyCode.RightArrow) || key.IsKey("Right")) {
-            rig.AddForce(new Vector2(10.0f * speed, 0));
+            rig.velocity = new Vector2(2.0f * speed, 0);
             speed += 0.05f;
         }
 
         if (Input.GetKey(KeyCode.LeftArrow) || key.IsKey("Left")) {
-            rig.AddForce(new Vector2(-1.0f * speed, 0));
+            rig.velocity = new Vector2(-2.0f * speed, 0);
             speed -= 0.05f;
         } else {
-            rig.AddForce(new Vector2(10.0f * speed, 0));
+            //rig.velocity = new Vector2(2.0f * speed, 0);
         }
         Flick();
         transform.position = position;
@@ -79,9 +81,9 @@ public class Player : MonoBehaviour {
             EndPos = Input.mousePosition.x;
         }
         if (StartPos > EndPos) {
-            rig.AddForce(new Vector2(-10.0f,0));
+            rig.AddForce(new Vector2(-2.0f,0));
         } else if (StartPos < EndPos) {
-            rig.AddForce(new Vector2(10.0f, 0));
+            rig.AddForce(new Vector2(2.0f, 0));
         }
     }
 

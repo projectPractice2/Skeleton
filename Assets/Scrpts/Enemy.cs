@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour {
         stageController = GameObject.Find("StageController").GetComponent<StageController>();
         position = transform.position;
         rig = GetComponent<Rigidbody>();
-        rig.velocity = new Vector3(-0.1f, 0);
+        //rig.velocity = new Vector3(-20f, 0);
 	}
 	
 	// Update is called once per frame
@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour {
     void AA() {
         int x = Mathf.FloorToInt(transform.position.x);
         int y = Mathf.FloorToInt(transform.position.y);
-        if (x <= 1 || y >= 30) {
+        if (x <= 0 || x > 94  || y<0 || y >= 30) {
             Destroy(gameObject);
         }
         Debug.Log("x : " + x + " , y : " + y);
